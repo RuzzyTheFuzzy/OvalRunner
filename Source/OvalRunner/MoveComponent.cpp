@@ -29,7 +29,7 @@ void UMoveComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	this->GetOwner()->AddActorWorldTransform(FTransform(DeltaTime * Movement));
+	this->GetOwner()->AddActorWorldOffset(DeltaTime * Movement, CheckForCollision);
 }
 
 void UMoveComponent::SetMovement(FVector NewMovement)

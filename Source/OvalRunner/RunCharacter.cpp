@@ -13,6 +13,7 @@ ARunCharacter::ARunCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 
 	TreadmillComponent = CreateDefaultSubobject<UMoveComponent>("Treadmill Movement");
+	
 }
 
 // Called when the game starts or when spawned

@@ -23,6 +23,9 @@ protected:
 	UPROPERTY(EditAnywhere,BlueprintReadOnly , Category = "Treadmill")
 	FVector Movement;
 
+	UPROPERTY(EditAnywhere,BlueprintReadOnly , Category = "Treadmill")
+	bool CheckForCollision;
+
 public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
