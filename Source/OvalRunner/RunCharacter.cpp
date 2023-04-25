@@ -11,9 +11,6 @@ ARunCharacter::ARunCharacter()
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
-	TreadmillComponent = CreateDefaultSubobject<UMoveComponent>("Treadmill Movement");
-	
 }
 
 // Called when the game starts or when spawned
@@ -26,6 +23,10 @@ void ARunCharacter::BeginPlay()
 void ARunCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	// TODO: Please ohgod find a better way to do this i beg thee
+	// So that collision is always checked
+	AddMovementInput(FVector::One(), 0.001);
 }
 
 // Called to bind functionality to input

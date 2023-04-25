@@ -11,8 +11,8 @@ UCLASS()
 class OVALRUNNER_API AObsticleSpawner : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
 	AObsticleSpawner();
 
@@ -20,11 +20,38 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Obsticles")
+	UPROPERTY(EditDefaultsOnly, Category = "Obstacles")
 	TSubclassOf<AObsticle> Obsticle;
 
-public:	
+	UPROPERTY(EditDefaultsOnly, Category = "Obstacles")
+	FVector2D YSpawnRange;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Obstacles")
+	FVector StartingMovement;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Obstacles")
+	float SpeedIncrease;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Obstacles")
+	float ObjectsPerSecIncrease;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Obstacles")
+	float ObjectsPerSecond;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Obstacles")
+	float XDistanceObstacleRespawn;
+
+	UPROPERTY(VisibleAnywhere, Category = "Obstacles")
+	FVector CurrentMovement;
+
+	// I really dont get pointers ok? Is this correct?
+	TArray<TObjectPtr<AObsticle>> ReuseObstacles;
+
+	float Timer;
+
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	void AddToReusePile(AObsticle* Obstacle);
 };

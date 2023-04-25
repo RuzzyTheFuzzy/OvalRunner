@@ -20,10 +20,10 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere,BlueprintReadOnly , Category = "Treadmill")
+	UPROPERTY(EditAnywhere,BlueprintReadOnly , Category = "Movement")
 	FVector Movement;
 
-	UPROPERTY(EditAnywhere,BlueprintReadOnly , Category = "Treadmill")
+	UPROPERTY(EditAnywhere,BlueprintReadOnly , Category = "Movement")
 	bool CheckForCollision;
 
 public:

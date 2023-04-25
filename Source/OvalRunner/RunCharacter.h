@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "InputAction.h"
-#include "MoveComponent.h"
 #include "GameFramework/Character.h"
 #include "RunCharacter.generated.h"
 
@@ -24,9 +23,6 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputMappingContext> InputMapping;
 
-	UPROPERTY(VisibleAnywhere, Category = "Treadmill")
-	TObjectPtr<UMoveComponent> TreadmillComponent;
-
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -37,7 +33,7 @@ public:
 	void Move(const FInputActionValue& Value);
 
 	void Look(const FInputActionValue& Value);
-	
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputAction> InputJump;
 

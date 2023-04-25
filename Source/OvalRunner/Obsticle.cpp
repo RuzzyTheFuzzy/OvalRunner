@@ -19,15 +19,39 @@ AObsticle::AObsticle()
 void AObsticle::BeginPlay()
 {
 	Super::BeginPlay();
+
+	StartXPos = GetActorLocation().X;
 }
 
 // Called every frame
 void AObsticle::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (FMath::Abs(StartXPos - GetActorLocation().X) > RespawnXDistance)
+	{
+		if (!this->IsHidden())
+		{
+			this->SetActorHiddenInGame(true);
+			ReuseArray->Add(this);
+		}
+	}
 }
 
 void AObsticle::SetMovementSpeed(FVector NewMovement)
 {
 	MovementComponent->SetMovement(NewMovement);
+}
+
+void AObsticle::SetRespawnDistance(double XDistance)
+{
+	RespawnXDistance = XDistance;
+}
+
+void AObsticle::SetReuseArray(TObjectPtr<TArray<TObjectPtr<AObsticle>>> Array)
+{
+	if (ReuseArray == nullptr)
+	{
+		ReuseArray = Array;
+	}
 }
