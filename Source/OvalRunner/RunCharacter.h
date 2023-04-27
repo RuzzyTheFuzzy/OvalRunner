@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "InputAction.h"
+#include "Projectile.h"
 #include "GameFramework/Character.h"
 #include "RunCharacter.generated.h"
 
@@ -23,6 +24,15 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputMappingContext> InputMapping;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
+	TSubclassOf<AProjectile> Projectile;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
+	float ProjectileSpeed;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
+	float CooldownTime;
+
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -34,6 +44,8 @@ public:
 
 	void Look(const FInputActionValue& Value);
 
+	void Shoot(const FInputActionValue& Value);
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputAction> InputJump;
 
@@ -42,4 +54,7 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputAction> InputLook;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
+	TObjectPtr<UInputAction> InputShoot;
 };

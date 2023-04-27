@@ -30,7 +30,7 @@ void AObsticle::Tick(float DeltaTime)
 
 	if (FMath::Abs(StartXPos - GetActorLocation().X) > RespawnXDistance)
 	{
-		if (!this->IsHidden())
+		if (!this->IsHidden() && ReuseArray != nullptr) // Cause i care about safety
 		{
 			this->SetActorHiddenInGame(true);
 			ReuseArray->Add(this);

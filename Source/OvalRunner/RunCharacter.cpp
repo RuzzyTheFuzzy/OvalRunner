@@ -46,6 +46,7 @@ void ARunCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	PlayerEnhancedInput->BindAction(InputJump, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 	PlayerEnhancedInput->BindAction(InputMove, ETriggerEvent::Triggered, this, &ARunCharacter::Move);
 	PlayerEnhancedInput->BindAction(InputLook, ETriggerEvent::Triggered, this, &ARunCharacter::Look);
+	PlayerEnhancedInput->BindAction(InputShoot, ETriggerEvent::Triggered, this, &ARunCharacter::Shoot);
 }
 
 void ARunCharacter::Move(const FInputActionValue& Value)
@@ -90,5 +91,19 @@ void ARunCharacter::Look(const FInputActionValue& Value)
 		{
 			AddControllerPitchInput(LookDir.Y);
 		}
+	}
+}
+
+void ARunCharacter::Shoot(const FInputActionValue& Value)
+{
+	if (Controller != nullptr)
+	{
+		FVector Eyes = GetActorLocation();
+		Eyes.Z += BaseEyeHeight; // Shoot from eyes instead of belly
+
+		const AProjectile* NewProjectile = GetWorld()->SpawnActor<AProjectile>(
+			Projectile, Eyes, GetActorRotation());
+
+		NewProjectile->SetMovement(Controller->GetControlRotation().Vector() * ProjectileSpeed);
 	}
 }
