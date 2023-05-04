@@ -5,6 +5,8 @@
 
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "OvalRunnerGameModeBase.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ARunCharacter::ARunCharacter()
@@ -19,6 +21,24 @@ void ARunCharacter::BeginPlay()
 	Super::BeginPlay();
 }
 
+void ARunCharacter::RespawnCharacter()
+{
+	AOvalRunnerGameModeBase* GameMode = Cast<AOvalRunnerGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
+
+	Health--;
+
+	if (Health <= 0)
+	{
+		SetActorHiddenInGame(true);
+
+		GameMode->FinishGame();
+	}
+	else
+	{
+		SetActorLocation(RespawnPoint);
+	}
+}
+
 // Called every frame
 void ARunCharacter::Tick(float DeltaTime)
 {
@@ -27,6 +47,11 @@ void ARunCharacter::Tick(float DeltaTime)
 	// TODO: Please ohgod find a better way to do this i beg thee
 	// So that collision is always checked
 	AddMovementInput(FVector::One(), 0.001);
+
+	if (GetActorLocation().Z < RespawnHeigh)
+	{
+		RespawnCharacter();
+	}
 }
 
 // Called to bind functionality to input

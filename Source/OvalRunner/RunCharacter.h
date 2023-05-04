@@ -21,6 +21,8 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	void RespawnCharacter();
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputMappingContext> InputMapping;
 
@@ -32,6 +34,18 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
 	float CooldownTime;
+
+	// Amount of health
+	UPROPERTY(EditDefaultsOnly, Category = "Life")
+	int Health;
+
+	// If below this height, you take damage and respawn
+	UPROPERTY(EditDefaultsOnly, Category = "Life")
+	float RespawnHeigh;
+
+	// Where to respawn
+	UPROPERTY(EditDefaultsOnly, Category = "Live")
+	FVector RespawnPoint;
 
 public:
 	// Called every frame
