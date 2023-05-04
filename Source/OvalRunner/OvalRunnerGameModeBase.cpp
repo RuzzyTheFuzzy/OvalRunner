@@ -43,6 +43,9 @@ void AOvalRunnerGameModeBase::FinishGame()
 
 			UGameplayStatics::SaveGameToSlot(SaveScoreInstance, SaveSlot, UserIndex);
 		}
+	} else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("SaveScoreInstance is a null pointer. Score will not be saved"))
 	}
 
 	UGameplayStatics::OpenLevel(GetWorld(), LevelToLoad);
