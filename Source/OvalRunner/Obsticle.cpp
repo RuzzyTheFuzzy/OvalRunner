@@ -10,7 +10,7 @@ AObsticle::AObsticle()
 	PrimaryActorTick.bCanEverTick = true;
 
 	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>("Static Mesh");
-	StaticMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	SetRootComponent(StaticMeshComponent);
 
 	MovementComponent = CreateDefaultSubobject<UMoveComponent>("Movement Component");
 }
