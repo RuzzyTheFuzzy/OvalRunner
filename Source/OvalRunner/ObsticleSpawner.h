@@ -20,7 +20,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Obstacles")
+	UPROPERTY(EditAnywhere, Category = "Obstacles")
 	TSubclassOf<AObsticle> Obsticle;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Obstacles")
@@ -32,10 +32,10 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Obstacles")
 	float SpeedIncrease;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Obstacles")
+	UPROPERTY(EditAnywhere, Category = "Obstacles")
 	float ObjectsPerSecIncrease;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Obstacles")
+	UPROPERTY(EditAnywhere, Category = "Obstacles")
 	float ObjectsPerSecond;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Obstacles")
