@@ -1,7 +1,7 @@
 # OvalRunner
 Endless runner but fps
 
-WASD and mouse to move around. I aint got any menus, so just alt+f4 to quit.
+WASD and mouse to move around. Left click to shoot.
 
 The obsticles class was designed with Blueprints in mind for variations in the obstacles.
 The spawner accepts any blueprint that inherets from the obsticles class, so you can spawn different obstacles with varying speed, and rarity.
