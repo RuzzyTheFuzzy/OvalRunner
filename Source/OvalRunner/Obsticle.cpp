@@ -38,9 +38,13 @@ void AObsticle::Tick(float DeltaTime)
 	}
 }
 
-void AObsticle::SetMovementSpeed(FVector NewMovement)
+void AObsticle::SetMovementSpeed(FVector NewMovement) const
 {
-	MovementComponent->SetMovement(NewMovement);
+	
+	if (IsValid(MovementComponent))
+	{
+		MovementComponent->SetMovement(NewMovement);
+	}
 }
 
 void AObsticle::SetRespawnDistance(double XDistance)
