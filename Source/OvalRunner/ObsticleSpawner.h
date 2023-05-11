@@ -44,14 +44,15 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Obstacles")
 	FVector CurrentMovement;
 
-	// I really dont get pointers ok? Is this correct?
+	UPROPERTY()
 	TArray<TObjectPtr<AObsticle>> ReuseObstacles;
+
+	UPROPERTY()
+	TArray<TObjectPtr<AObsticle>> SpawnedObstacles;
 
 	float Timer;
 
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	void AddToReusePile(AObsticle* Obstacle);
 };

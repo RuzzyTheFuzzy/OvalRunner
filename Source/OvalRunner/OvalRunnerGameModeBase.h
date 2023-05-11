@@ -22,8 +22,10 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
+	UPROPERTY()
 	TObjectPtr<USaveScore> SaveScoreInstance;
 
+	UPROPERTY()
 	FString SaveSlot = "SaveSlot";
 	int UserIndex = 0;
 

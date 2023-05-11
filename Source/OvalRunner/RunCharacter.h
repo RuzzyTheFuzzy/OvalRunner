@@ -44,7 +44,7 @@ protected:
 	float RespawnHeigh;
 
 	// Where to respawn
-	UPROPERTY(EditDefaultsOnly, Category = "Live")
+	UPROPERTY(EditDefaultsOnly, Category = "Life")
 	FVector RespawnPoint;
 
 public:

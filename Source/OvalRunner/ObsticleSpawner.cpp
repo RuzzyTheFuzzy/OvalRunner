@@ -43,8 +43,8 @@ void AObsticleSpawner::Tick(float DeltaTime)
 			AObsticle* NewObsticle = GetWorld()->SpawnActor<AObsticle>(Obsticle, Position, FRotator());
 
 			NewObsticle->SetMovementSpeed(CurrentMovement);
-			NewObsticle->SetReuseArray(&ReuseObstacles);
-			NewObsticle->SetRespawnDistance(XDistanceObstacleRespawn);
+			NewObsticle->SetActorLocation(Position);
+			SpawnedObstacles.Add(NewObsticle);
 		}
 		else
 		{
@@ -57,12 +57,29 @@ void AObsticleSpawner::Tick(float DeltaTime)
 		Timer = 1 / ObjectsPerSecond; // By using OPS its easier to increase spawn speed linearly
 	}
 
+	// Check respawns here to not need references in object
+	for (AObsticle* Obstacle : SpawnedObstacles)
+	{
+		if (Obstacle == nullptr)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Found nullptr in array in %s"), *GetActorNameOrLabel())
+			continue;
+		}
+		
+		if (Obstacle->IsHidden())
+		{
+			continue; // Already in reuse array or hidden by external force
+		}
+		
+		if ( FMath::Abs(GetActorLocation().X - Obstacle->GetActorLocation().X) > XDistanceObstacleRespawn)
+		{
+			Obstacle->SetActorHiddenInGame(true);
+			ReuseObstacles.Add(Obstacle);
+		}
+	}
+
 	CurrentMovement += CurrentMovement.GetSafeNormal() * (SpeedIncrease * DeltaTime);
 
 	ObjectsPerSecond += ObjectsPerSecIncrease * DeltaTime;
 }
 
-void AObsticleSpawner::AddToReusePile(AObsticle* Obstacle)
-{
-	ReuseObstacles.Add(Obstacle);
-}
