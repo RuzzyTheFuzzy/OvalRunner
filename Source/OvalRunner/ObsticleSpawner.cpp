@@ -62,7 +62,7 @@ void AObsticleSpawner::Tick(float DeltaTime)
 	{
 		if (Obstacle == nullptr)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Found nullptr in array in %s"), *GetActorNameOrLabel())
+			// UE_LOG(LogTemp, Warning, TEXT("Found nullptr in array in %s"), *GetActorNameOrLabel())
 			continue;
 		}
 		

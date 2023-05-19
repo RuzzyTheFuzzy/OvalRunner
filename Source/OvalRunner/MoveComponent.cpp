@@ -14,15 +14,6 @@ UMoveComponent::UMoveComponent()
 }
 
 
-// Called when the game starts
-void UMoveComponent::BeginPlay()
-{
-	Super::BeginPlay();
-
-	// ...
-}
-
-
 // Called every frame
 void UMoveComponent::TickComponent(float DeltaTime, ELevelTick TickType,
                                    FActorComponentTickFunction* ThisTickFunction)
@@ -37,7 +28,7 @@ void UMoveComponent::SetMovement(FVector NewMovement)
 	Movement = NewMovement;
 }
 
-FVector UMoveComponent::GetMovement()
+FVector UMoveComponent::GetMovement() const
 {
 	return Movement;
 }

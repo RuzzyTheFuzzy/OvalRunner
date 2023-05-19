@@ -15,13 +15,6 @@ class OVALRUNNER_API AOvalRunnerGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 
-public:
-	AOvalRunnerGameModeBase();
-
-protected:
-	virtual void BeginPlay() override;
-
-private:
 	UPROPERTY()
 	TObjectPtr<USaveScore> SaveScoreInstance;
 
@@ -40,6 +33,12 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Score", meta = (AllowPrivateAccess = "true"))
 	float HighScore;
+
+public:
+	AOvalRunnerGameModeBase();
+
+protected:
+	virtual void BeginPlay() override;
 
 public:
 	virtual void Tick(float DeltaTime) override;

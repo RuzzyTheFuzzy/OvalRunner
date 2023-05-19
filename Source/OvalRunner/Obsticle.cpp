@@ -14,7 +14,7 @@ AObsticle::AObsticle()
 
 void AObsticle::SetMovementSpeed(FVector NewMovement) const
 {
-	if (MovementComponent)
+	if (MovementComponent != nullptr)
 	{
 		MovementComponent->SetMovement(NewMovement);
 	}

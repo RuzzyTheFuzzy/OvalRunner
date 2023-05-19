@@ -17,9 +17,6 @@ public:
 	UMoveComponent();
 
 protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
 	UPROPERTY(EditAnywhere,BlueprintReadOnly , Category = "Movement")
 	FVector Movement;
 
@@ -32,5 +29,5 @@ public:
 	                           FActorComponentTickFunction* ThisTickFunction) override;
 
 	void SetMovement(FVector NewMovement);
-	FVector GetMovement();
+	FVector GetMovement() const;
 };

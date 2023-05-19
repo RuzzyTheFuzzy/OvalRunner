@@ -25,12 +25,6 @@ ARunCharacter::ARunCharacter()
 	CameraComponent->bUsePawnControlRotation = true;
 }
 
-// Called when the game starts or when spawned
-void ARunCharacter::BeginPlay()
-{
-	Super::BeginPlay();
-}
-
 void ARunCharacter::RespawnCharacter()
 {
 	AOvalRunnerGameModeBase* GameMode = Cast<AOvalRunnerGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
@@ -41,7 +35,6 @@ void ARunCharacter::RespawnCharacter()
 	{
 		GameMode->DamagePlayer();
 	}
-	
 }
 
 // Called every frame
@@ -64,13 +57,22 @@ void ARunCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 {
 	const APlayerController* PlayerController = Cast<APlayerController>(GetController());
 
+	if (PlayerController == nullptr)
+		return;
+
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(
 		PlayerController->GetLocalPlayer());
+
+	if (Subsystem == nullptr)
+		return;
 
 	Subsystem->ClearAllMappings();
 	Subsystem->AddMappingContext(InputMapping, 0);
 
 	UEnhancedInputComponent* PlayerEnhancedInput = Cast<UEnhancedInputComponent>(PlayerInputComponent);
+
+	if (PlayerEnhancedInput == nullptr)
+		return;
 
 	PlayerEnhancedInput->BindAction(InputJump, ETriggerEvent::Triggered, this, &ACharacter::Jump);
 	PlayerEnhancedInput->BindAction(InputJump, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
@@ -134,6 +136,9 @@ void ARunCharacter::Shoot(const FInputActionValue& Value)
 		const AProjectile* NewProjectile = GetWorld()->SpawnActor<AProjectile>(
 			Projectile, Eyes, GetActorRotation());
 
-		NewProjectile->SetMovement(Controller->GetControlRotation().Vector() * ProjectileSpeed);
+		if (NewProjectile != nullptr)
+		{
+			NewProjectile->SetMovement(Controller->GetControlRotation().Vector() * ProjectileSpeed);
+		}
 	}
 }
