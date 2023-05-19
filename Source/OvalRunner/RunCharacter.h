@@ -35,10 +35,6 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
 	float CooldownTime;
 
-	// Amount of health
-	UPROPERTY(EditDefaultsOnly, Category = "Life")
-	int Health;
-
 	// If below this height, you take damage and respawn
 	UPROPERTY(EditDefaultsOnly, Category = "Life")
 	float RespawnHeigh;

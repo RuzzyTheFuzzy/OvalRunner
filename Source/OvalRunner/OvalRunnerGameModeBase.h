@@ -31,15 +31,18 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Main Menu")
 	FName LevelToLoad;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Health", meta = (AllowPrivateAccess = "true", ClampMin = 1))
+	uint8 PlayerHealth;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Score", meta = (AllowPrivateAccess = "true"))
+	float CurrentScore;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Score", meta = (AllowPrivateAccess = "true"))
+	float HighScore;
 
 public:
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Score")
-	float CurrentScore;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Score")
-	float HighScore;
-
-	void FinishGame();
+	void DamagePlayer();
 };

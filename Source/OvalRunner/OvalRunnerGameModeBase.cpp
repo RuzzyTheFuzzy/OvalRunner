@@ -9,6 +9,8 @@ AOvalRunnerGameModeBase::AOvalRunnerGameModeBase()
 {
 	PrimaryActorTick.bStartWithTickEnabled = true;
 	PrimaryActorTick.bCanEverTick = true;
+
+	PlayerHealth = 3;
 }
 
 void AOvalRunnerGameModeBase::BeginPlay()
@@ -31,19 +33,26 @@ void AOvalRunnerGameModeBase::Tick(float DeltaTime)
 	CurrentScore += DeltaTime;
 }
 
-void AOvalRunnerGameModeBase::FinishGame()
+void AOvalRunnerGameModeBase::DamagePlayer()
 {
-	if (SaveScoreInstance != nullptr)
+
+	if (PlayerHealth > 0) // Avoid looping from 0 to 255
+	PlayerHealth--;
+
+	if (PlayerHealth == 0)
 	{
-		HighScore = SaveScoreInstance->HighScore;
-
-		if (HighScore < CurrentScore)
+		if (SaveScoreInstance != nullptr)
 		{
-			SaveScoreInstance->HighScore = CurrentScore;
+			HighScore = SaveScoreInstance->HighScore;
 
-			UGameplayStatics::SaveGameToSlot(SaveScoreInstance, SaveSlot, UserIndex);
+			if (HighScore < CurrentScore)
+			{
+				SaveScoreInstance->HighScore = CurrentScore;
+
+				UGameplayStatics::SaveGameToSlot(SaveScoreInstance, SaveSlot, UserIndex);
+			}
 		}
-	}
 
-	UGameplayStatics::OpenLevel(GetWorld(), LevelToLoad);
+		UGameplayStatics::OpenLevel(GetWorld(), LevelToLoad);
+	}
 }

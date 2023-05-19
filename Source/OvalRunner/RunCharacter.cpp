@@ -25,18 +25,13 @@ void ARunCharacter::RespawnCharacter()
 {
 	AOvalRunnerGameModeBase* GameMode = Cast<AOvalRunnerGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
 
-	Health--;
+	SetActorLocation(RespawnPoint);
 
-	if (Health <= 0)
+	if (GameMode != nullptr)
 	{
-		SetActorHiddenInGame(true);
-
-		GameMode->FinishGame();
+		GameMode->DamagePlayer();
 	}
-	else
-	{
-		SetActorLocation(RespawnPoint);
-	}
+	
 }
 
 // Called every frame
