@@ -6,6 +6,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "OvalRunnerGameModeBase.h"
+#include "Camera/CameraComponent.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -13,6 +14,15 @@ ARunCharacter::ARunCharacter()
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	bUseControllerRotationPitch = false;
+	bUseControllerRotationYaw = false;
+	bUseControllerRotationRoll = false;
+
+	CameraComponent = CreateDefaultSubobject<UCameraComponent>("Camera");
+	CameraComponent->SetupAttachment(RootComponent);
+
+	CameraComponent->bUsePawnControlRotation = true;
 }
 
 // Called when the game starts or when spawned

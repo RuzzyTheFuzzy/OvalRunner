@@ -43,6 +43,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Life")
 	FVector RespawnPoint;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "CameraSettings")
+	TObjectPtr<class UCameraComponent> CameraComponent;
+
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
