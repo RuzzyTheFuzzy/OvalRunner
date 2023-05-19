@@ -31,7 +31,6 @@ void AObsticleSpawner::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	Timer -= DeltaTime;
-
 	if (Timer <= 0)
 	{
 		FVector Position = GetActorLocation();
@@ -65,13 +64,13 @@ void AObsticleSpawner::Tick(float DeltaTime)
 			// UE_LOG(LogTemp, Warning, TEXT("Found nullptr in array in %s"), *GetActorNameOrLabel())
 			continue;
 		}
-		
+
 		if (Obstacle->IsHidden())
 		{
 			continue; // Already in reuse array or hidden by external force
 		}
-		
-		if ( FMath::Abs(GetActorLocation().X - Obstacle->GetActorLocation().X) > XDistanceObstacleRespawn)
+
+		if (FMath::Abs(GetActorLocation().X - Obstacle->GetActorLocation().X) > XDistanceObstacleRespawn)
 		{
 			Obstacle->SetActorHiddenInGame(true);
 			ReuseObstacles.Add(Obstacle);
@@ -82,4 +81,3 @@ void AObsticleSpawner::Tick(float DeltaTime)
 
 	ObjectsPerSecond += ObjectsPerSecIncrease * DeltaTime;
 }
-
